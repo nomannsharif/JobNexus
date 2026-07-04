@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs - JobNexus</title>
+    <meta name="description" content="Search and filter thousands of job listings. Find the perfect job by location, category, salary, and job type.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { inter: ['Inter', 'sans-serif'], outfit: ['Outfit', 'sans-serif'] }, colors: { primary: { 50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81' }, accent: { 400:'#fb923c',500:'#f97316',600:'#ea580c' }, dark: { 900:'#0f0f23',800:'#1a1a2e',700:'#16213e',600:'#0f3460' } } } }
+        }
+    </script>
+</head>
+<body class="font-inter bg-dark-900 text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-briefcase text-white text-sm"></i>
+                    </div>
+                    <span class="font-outfit font-bold text-2xl bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">JobNexus</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300">Home</a>
+                    <a href="jobs.html" class="nav-link active px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300">Find Jobs</a>
+                    <a href="companies.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300">Companies</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300">About</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300">Contact</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-3">
+                    <a href="login.html" class="btn-ghost px-5 py-2.5 rounded-full text-sm font-medium">Sign In</a>
+                    <a href="register.html" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">Get Started</a>
+                    <a href="employer-dashboard.html" class="btn-outline px-5 py-2.5 rounded-full text-sm font-medium"><i class="fas fa-building mr-2"></i>Post a Job</a>
+                </div>
+                <button id="menuBtn" class="lg:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300" onclick="toggleMenu()">
+                    <i id="menuIcon" class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden glass-dark border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
+                <a href="index.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-home mr-3 w-4"></i>Home</a>
+                <a href="jobs.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-search mr-3 w-4"></i>Find Jobs</a>
+                <a href="companies.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-building mr-3 w-4"></i>Companies</a>
+                <a href="about.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-info-circle mr-3 w-4"></i>About</a>
+                <a href="contact.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-envelope mr-3 w-4"></i>Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-32 pb-12 relative overflow-hidden">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at top center, rgba(99,102,241,0.15) 0%, transparent 70%), linear-gradient(180deg,#0f0f23 0%,#1a1a2e 100%)"></div>
+        <div class="orb" style="width:300px;height:300px;background:#6366f1;top:-100px;right:-50px;"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h1 class="font-outfit font-black text-4xl sm:text-5xl text-white mb-3">Find Your Next <span class="gradient-text">Opportunity</span></h1>
+                <p class="text-gray-400">Explore <span id="totalCount" class="text-primary-400 font-semibold">12,000+</span> jobs from top companies</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="glass rounded-2xl p-3 border border-primary-500/20 shadow-2xl shadow-primary-500/10 mb-6">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <div class="flex-1 flex items-center bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-primary-500 transition-colors duration-300">
+                        <i class="fas fa-search text-primary-400 mr-3"></i>
+                        <input id="jobSearch" type="text" placeholder="Job title, keywords..." class="bg-transparent outline-none text-white placeholder-gray-500 flex-1 text-sm">
+                    </div>
+                    <div class="flex-1 flex items-center bg-white/5 rounded-xl px-4 py-3 border border-white/10 focus-within:border-primary-500 transition-colors duration-300">
+                        <i class="fas fa-map-marker-alt text-accent-400 mr-3"></i>
+                        <input id="locationSearch" type="text" placeholder="Location or remote..." class="bg-transparent outline-none text-white placeholder-gray-500 flex-1 text-sm">
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="searchJobs()" id="searchBtn" class="btn-primary px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2">
+                            <i class="fas fa-search"></i><span>Search</span>
+                        </button>
+                        <button onclick="clearSearch()" class="btn-outline px-4 py-3 rounded-xl text-sm">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <!-- Mobile filter toggle -->
+                        <button onclick="toggleFilterSidebar()" class="lg:hidden btn-outline px-4 py-3 rounded-xl text-sm">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Filter Tags -->
+            <div class="flex flex-wrap gap-2" id="activeFilters">
+                <span class="text-xs text-gray-500 self-center">Filter by:</span>
+                <button onclick="setTypeFilter('Full-time')" class="filter-tag" data-filter="Full-time">Full-time</button>
+                <button onclick="setTypeFilter('Part-time')" class="filter-tag" data-filter="Part-time">Part-time</button>
+                <button onclick="setTypeFilter('Contract')" class="filter-tag" data-filter="Contract">Contract</button>
+                <button onclick="setRemoteFilter()" class="filter-tag" data-filter="remote">Remote Only</button>
+                <button onclick="setNewFilter()" class="filter-tag" data-filter="new">New (24h)</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-8 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex gap-8">
+
+                <!-- Filter Sidebar -->
+                <aside class="filter-sidebar lg:relative lg:transform-none w-72 flex-shrink-0" id="filterSidebar">
+                    <!-- Close btn mobile -->
+                    <button onclick="toggleFilterSidebar()" class="lg:hidden absolute top-4 right-4 text-gray-400 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h3 class="font-outfit font-bold text-lg text-white mb-6 flex items-center gap-2"><i class="fas fa-sliders-h text-primary-400"></i>Filters</h3>
+
+                    <!-- Category -->
+                    <div class="mb-6">
+                        <p class="filter-title flex items-center gap-2"><i class="fas fa-th-large text-xs text-primary-400"></i>Category</p>
+                        <div id="catFilters">
+                            <label class="filter-option"><input type="radio" name="cat" value="" onchange="applyFilters()"> All Categories</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Technology" onchange="applyFilters()"> Technology</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Design" onchange="applyFilters()"> Design & Creative</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Marketing" onchange="applyFilters()"> Marketing</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Finance" onchange="applyFilters()"> Finance</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Engineering" onchange="applyFilters()"> Engineering</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Healthcare" onchange="applyFilters()"> Healthcare</label>
+                            <label class="filter-option"><input type="radio" name="cat" value="Sales" onchange="applyFilters()"> Sales & Business</label>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/8 my-4"></div>
+
+                    <!-- Job Type -->
+                    <div class="mb-6">
+                        <p class="filter-title flex items-center gap-2"><i class="fas fa-clock text-xs text-accent-400"></i>Job Type</p>
+                        <label class="filter-option"><input type="radio" name="type" value="" onchange="applyFilters()"> All Types</label>
+                        <label class="filter-option"><input type="radio" name="type" value="Full-time" onchange="applyFilters()"> Full-time</label>
+                        <label class="filter-option"><input type="radio" name="type" value="Part-time" onchange="applyFilters()"> Part-time</label>
+                        <label class="filter-option"><input type="radio" name="type" value="Contract" onchange="applyFilters()"> Contract</label>
+                    </div>
+
+                    <div class="border-t border-white/8 my-4"></div>
+
+                    <!-- Remote -->
+                    <div class="mb-6">
+                        <p class="filter-title flex items-center gap-2"><i class="fas fa-wifi text-xs text-green-400"></i>Work Mode</p>
+                        <label class="filter-option"><input type="radio" name="remote" value="" onchange="applyFilters()"> All Jobs</label>
+                        <label class="filter-option"><input type="radio" name="remote" value="1" onchange="applyFilters()"> Remote Only</label>
+                        <label class="filter-option"><input type="radio" name="remote" value="0" onchange="applyFilters()"> On-site Only</label>
+                    </div>
+
+                    <div class="border-t border-white/8 my-4"></div>
+
+                    <!-- Salary -->
+                    <div class="mb-6">
+                        <p class="filter-title flex items-center gap-2"><i class="fas fa-dollar-sign text-xs text-green-400"></i>Min Salary</p>
+                        <input type="range" id="salaryRange" min="40" max="180" value="40" step="10" class="w-full mb-2" oninput="updateSalaryDisplay(this.value); applyFilters();">
+                        <div class="flex justify-between text-xs text-gray-500">
+                            <span>$40k</span>
+                            <span id="salaryValue" class="text-primary-400 font-semibold">$40k+</span>
+                            <span>$180k</span>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/8 my-4"></div>
+
+                    <!-- Sort -->
+                    <div class="mb-4">
+                        <p class="filter-title flex items-center gap-2"><i class="fas fa-sort text-xs text-accent-400"></i>Sort By</p>
+                        <select id="sortBy" onchange="applyFilters()" class="form-input text-sm">
+                            <option value="newest">Newest First</option>
+                            <option value="salary-high">Salary: High to Low</option>
+                            <option value="salary-low">Salary: Low to High</option>
+                            <option value="featured">Featured First</option>
+                        </select>
+                    </div>
+
+                    <button onclick="resetFilters()" class="w-full btn-outline py-2.5 rounded-xl text-sm font-medium mt-2">
+                        <i class="fas fa-redo mr-2"></i>Reset Filters
+                    </button>
+                </aside>
+
+                <!-- Job Results -->
+                <div class="flex-1 min-w-0">
+                    <!-- Results info -->
+                    <div class="flex items-center justify-between mb-6">
+                        <p class="text-sm text-gray-400"><span id="resultsCount" class="text-white font-semibold">12</span> jobs found</p>
+                        <div class="flex items-center gap-2">
+                            <button onclick="setView('grid')" id="gridViewBtn" class="p-2 rounded-lg bg-primary-500/20 text-primary-400 border border-primary-500/30 transition-all hover:scale-105">
+                                <i class="fas fa-th text-sm"></i>
+                            </button>
+                            <button onclick="setView('list')" id="listViewBtn" class="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-all border border-white/10">
+                                <i class="fas fa-list text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Jobs Grid -->
+                    <div id="jobsGrid" class="grid grid-cols-1 xl:grid-cols-2 gap-5 mb-10">
+                        <!-- Filled by JS -->
+                    </div>
+
+                    <!-- No Results -->
+                    <div id="noResults" class="hidden text-center py-20">
+                        <div class="w-20 h-20 rounded-full bg-primary-500/10 border border-primary-500/20 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-search text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">No jobs found</h3>
+                        <p class="text-gray-400 mb-6">Try adjusting your filters or search terms</p>
+                        <button onclick="resetFilters()" class="btn-primary px-6 py-3 rounded-full text-sm">Reset Filters</button>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div id="pagination" class="flex items-center justify-center gap-2 mt-8">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">© 2024 JobNexus. All rights reserved. | Developed by Noman (SP24-BAi-041)</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-chevron-up text-sm"></i>
+    </button>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-500">
+        <div class="glass border border-white/20 rounded-2xl px-5 py-4 flex items-center space-x-3 shadow-2xl">
+            <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center"></div>
+            <span id="toastMsg" class="text-sm font-medium text-white"></span>
+        </div>
+    </div>
+
+    <style>
+        .filter-tag { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; cursor: pointer; transition: all 0.3s ease; }
+        .filter-tag:hover, .filter-tag.active { background: rgba(99,102,241,0.2); border-color: rgba(99,102,241,0.5); color: #818cf8; }
+        .list-view .jobs-list-card { flex-direction: row; align-items: center; }
+    </style>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/jobs.js"></script>
+</body>
+</html>

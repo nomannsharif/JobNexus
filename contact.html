@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - JobNexus</title>
+    <meta name="description" content="Get in touch with the JobNexus team. We're here to help with any questions about jobs, employers, or the platform.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{inter:['Inter','sans-serif'],outfit:['Outfit','sans-serif']},colors:{primary:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},accent:{400:'#fb923c',500:'#f97316',600:'#ea580c'},dark:{900:'#0f0f23',800:'#1a1a2e',700:'#16213e',600:'#0f3460'}}}}}</script>
+</head>
+<body class="font-inter bg-dark-900 text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-briefcase text-white text-sm"></i></div>
+                    <span class="font-outfit font-bold text-2xl bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">JobNexus</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Home</a>
+                    <a href="jobs.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Find Jobs</a>
+                    <a href="companies.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Companies</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">About</a>
+                    <a href="contact.html" class="nav-link active px-4 py-2 rounded-xl text-sm font-medium">Contact</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-3">
+                    <a href="login.html" class="btn-ghost px-5 py-2.5 rounded-full text-sm font-medium">Sign In</a>
+                    <a href="register.html" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">Get Started</a>
+                </div>
+                <button id="menuBtn" class="lg:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all" onclick="toggleMenu()"><i id="menuIcon" class="fas fa-bars text-xl"></i></button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden glass-dark border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
+                <a href="index.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-home mr-3 w-4"></i>Home</a>
+                <a href="jobs.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-search mr-3 w-4"></i>Find Jobs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-36 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at top, rgba(99,102,241,0.2) 0%, transparent 70%), linear-gradient(180deg,#0f0f23,#1a1a2e)"></div>
+        <div class="orb orb-1"></div>
+        <div class="relative max-w-3xl mx-auto px-4 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass border border-primary-500/30 mb-6">
+                <i class="fas fa-comments text-primary-400 text-xs"></i>
+                <span class="text-xs text-gray-300 font-medium uppercase tracking-widest">Get in Touch</span>
+            </div>
+            <h1 class="font-outfit font-black text-5xl text-white mb-6">We'd Love to <span class="gradient-text">Hear From You</span></h1>
+            <p class="text-gray-400 text-lg">Have questions, feedback, or partnership inquiries? Our team is ready to help.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+                <!-- Info Cards -->
+                <div class="lg:col-span-2 space-y-5">
+                    <!-- Contact Info -->
+                    <div class="contact-card">
+                        <h3 class="font-outfit font-bold text-2xl text-white mb-6">Contact Information</h3>
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-primary-500/20 border border-primary-500/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-envelope text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">Email Us</p>
+                                    <a href="mailto:support@jobnexus.com" class="text-sm text-gray-400 hover:text-primary-400 transition-colors">support@jobnexus.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-accent-500/20 border border-accent-500/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone text-accent-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">Call Us</p>
+                                    <a href="tel:+15551234567" class="text-sm text-gray-400 hover:text-accent-400 transition-colors">+1 (555) 123-4567</a>
+                                    <p class="text-xs text-gray-500">Mon–Fri, 9am–6pm EST</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-green-500/20 border border-green-500/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-green-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">Visit Us</p>
+                                    <p class="text-sm text-gray-400">123 Career Street, Suite 400<br>San Francisco, CA 94105</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-purple-500/20 border border-purple-500/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-comments text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">Live Chat</p>
+                                    <button onclick="openChat()" class="text-sm text-purple-400 hover:underline">Start a live chat →</button>
+                                    <p class="text-xs text-gray-500">Available 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-white/8">
+                            <p class="text-sm font-medium text-white mb-3">Follow Us</p>
+                            <div class="flex gap-3">
+                                <a href="https://x.com/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-twitter"></i></a>
+                                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-instagram"></i></a>
+                                <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Quick Links -->
+                    <div class="contact-card">
+                        <h4 class="font-semibold text-white mb-4">Quick Help</h4>
+                        <div class="space-y-2">
+                            <button onclick="expandFAQ(this)" class="faq-item w-full text-left p-3 rounded-xl bg-white/3 hover:bg-white/5 transition-all">
+                                <p class="text-sm text-white flex items-center justify-between">How do I apply for a job? <i class="fas fa-chevron-down text-xs text-gray-400"></i></p>
+                                <p class="faq-answer hidden text-xs text-gray-400 mt-2">Click "Apply Now" on any job listing. Sign in, and your profile will be sent to the employer automatically.</p>
+                            </button>
+                            <button onclick="expandFAQ(this)" class="faq-item w-full text-left p-3 rounded-xl bg-white/3 hover:bg-white/5 transition-all">
+                                <p class="text-sm text-white flex items-center justify-between">How do I post a job? <i class="fas fa-chevron-down text-xs text-gray-400"></i></p>
+                                <p class="faq-answer hidden text-xs text-gray-400 mt-2">Register as an Employer, go to your dashboard, and click "Post a Job". Your first 3 posts are free!</p>
+                            </button>
+                            <button onclick="expandFAQ(this)" class="faq-item w-full text-left p-3 rounded-xl bg-white/3 hover:bg-white/5 transition-all">
+                                <p class="text-sm text-white flex items-center justify-between">Is JobNexus free? <i class="fas fa-chevron-down text-xs text-gray-400"></i></p>
+                                <p class="faq-answer hidden text-xs text-gray-400 mt-2">Yes! Job seekers always use JobNexus for free. Employers get 3 free posts, with premium plans for more.</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="lg:col-span-3">
+                    <div class="contact-card h-full">
+                        <h3 class="font-outfit font-bold text-2xl text-white mb-6">Send a Message</h3>
+                        <form id="contactForm" onsubmit="submitContact(event)">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div class="form-group">
+                                    <label class="form-label">First Name *</label>
+                                    <input type="text" id="cFirstName" class="form-input" placeholder="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Last Name *</label>
+                                    <input type="text" id="cLastName" class="form-input" placeholder="Doe" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address *</label>
+                                <input type="email" id="cEmail" class="form-input" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Subject *</label>
+                                <select class="form-input" required>
+                                    <option value="">Select a topic</option>
+                                    <option>Job Seeker Support</option>
+                                    <option>Employer / Recruitment Help</option>
+                                    <option>Technical Issue</option>
+                                    <option>Partnership / Business</option>
+                                    <option>Press / Media</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Message *</label>
+                                <textarea id="cMessage" class="form-input" rows="6" placeholder="Describe your question or issue in detail..." required></textarea>
+                            </div>
+
+                            <!-- Character counter -->
+                            <div class="text-right mb-4">
+                                <span id="charCount" class="text-xs text-gray-500">0/500 characters</span>
+                            </div>
+
+                            <div class="flex items-start gap-3 mb-6">
+                                <input type="checkbox" id="contactConsent" required style="accent-color:#6366f1;width:16px;height:16px;margin-top:2px;flex-shrink:0;">
+                                <label for="contactConsent" class="text-xs text-gray-400 cursor-pointer">I agree to be contacted by the JobNexus team regarding my inquiry and accept the <a href="#" class="text-primary-400 hover:underline">Privacy Policy</a>.</label>
+                            </div>
+
+                            <button type="submit" id="submitBtn" class="btn-primary w-full py-4 rounded-xl text-sm font-semibold flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Message</span>
+                            </button>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="successMsg" class="hidden text-center py-10">
+                            <div class="w-20 h-20 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-green-400 text-2xl"></i>
+                            </div>
+                            <h4 class="font-outfit font-bold text-xl text-white mb-2">Message Sent!</h4>
+                            <p class="text-gray-400 text-sm">We'll get back to you within 24 hours. Check your inbox!</p>
+                            <button onclick="resetForm()" class="mt-5 btn-outline px-6 py-2.5 rounded-full text-sm">Send Another</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">© 2024 JobNexus. All rights reserved. | Developed by Noman (SP24-BAi-041)</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-sm"></i></button>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-500">
+        <div class="glass border border-white/20 rounded-2xl px-5 py-4 flex items-center space-x-3 shadow-2xl">
+            <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center"></div>
+            <span id="toastMsg" class="text-sm font-medium text-white"></span>
+        </div>
+    </div>
+
+    <style>
+        .faq-item { cursor: pointer; text-align: left; border: none; background: none; }
+        .faq-item .faq-answer { display: none; }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-item.open .fa-chevron-down { transform: rotate(180deg); transition: 0.3s; }
+    </style>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Character counter
+        document.getElementById('cMessage')?.addEventListener('input', function() {
+            const count = this.value.length;
+            const el = document.getElementById('charCount');
+            el.textContent = `${count}/500 characters`;
+            el.style.color = count > 450 ? '#f87171' : '#64748b';
+        });
+
+        function submitContact(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<div class="loader" style="width:18px;height:18px;border-width:2px;"></div><span>Sending...</span>';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                document.getElementById('contactForm').classList.add('hidden');
+                document.getElementById('successMsg').classList.remove('hidden');
+                showToast('Message sent successfully!', 'success');
+            }, 1800);
+        }
+
+        function resetForm() {
+            document.getElementById('contactForm').classList.remove('hidden');
+            document.getElementById('successMsg').classList.add('hidden');
+            document.getElementById('contactForm').reset();
+            document.getElementById('charCount').textContent = '0/500 characters';
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i><span>Send Message</span>';
+            btn.disabled = false;
+        }
+
+        function expandFAQ(el) {
+            const parent = el.closest('button') || el;
+            const isOpen = parent.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+            if (!isOpen) parent.classList.add('open');
+            const ans = parent.querySelector('.faq-answer');
+            if (ans) ans.style.display = parent.classList.contains('open') ? 'block' : 'none';
+        }
+
+        function openChat() { showToast('Live chat opening...', 'info'); }
+    </script>
+</body>
+</html>

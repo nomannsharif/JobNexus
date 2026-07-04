@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - JobNexus</title>
+    <meta name="description" content="Manage your job applications, saved jobs, and profile settings from your JobNexus dashboard.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{inter:['Inter','sans-serif'],outfit:['Outfit','sans-serif']},colors:{primary:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},accent:{400:'#fb923c',500:'#f97316',600:'#ea580c'},dark:{900:'#0f0f23',800:'#1a1a2e',700:'#16213e',600:'#0f3460'}}}}}</script>
+</head>
+<body class="font-inter bg-dark-900 text-white min-h-screen overflow-x-hidden">
+
+    <!-- Sidebar -->
+    <aside class="fixed left-0 top-0 bottom-0 w-64 glass-dark border-r border-white/8 z-40 hidden lg:flex flex-col">
+        <div class="p-6 border-b border-white/8">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-9 h-9 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-briefcase text-white text-xs"></i>
+                </div>
+                <span class="font-outfit font-bold text-xl gradient-text">JobNexus</span>
+            </a>
+        </div>
+
+        <!-- User Info -->
+        <div class="p-6 border-b border-white/8">
+            <div class="flex items-center gap-3">
+                <div class="avatar text-lg">JD</div>
+                <div>
+                    <p class="font-semibold text-white text-sm" id="sidebarName">John Doe</p>
+                    <p class="text-xs text-gray-400" id="sidebarRole">Job Seeker</p>
+                </div>
+            </div>
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs text-gray-500">Profile Completion</span>
+                    <span class="text-xs text-primary-400 font-medium" id="profilePct">75%</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill" id="profileFill" style="width:75%"></div></div>
+            </div>
+        </div>
+
+        <!-- Nav Links -->
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+            <a href="#" onclick="showTab('overview')" class="sidebar-link active" id="nav-overview">
+                <i class="fas fa-home w-4"></i>Overview
+            </a>
+            <a href="#" onclick="showTab('applications')" class="sidebar-link" id="nav-applications">
+                <i class="fas fa-file-alt w-4"></i>Applications
+                <span class="ml-auto text-xs px-2 py-0.5 rounded-full bg-primary-500/20 text-primary-400" id="sidebarAppsCount">0</span>
+            </a>
+            <a href="#" onclick="showTab('saved')" class="sidebar-link" id="nav-saved">
+                <i class="fas fa-heart w-4"></i>Saved Jobs
+            </a>
+            <a href="#" onclick="showTab('profile')" class="sidebar-link" id="nav-profile">
+                <i class="fas fa-user w-4"></i>My Profile
+            </a>
+            <a href="#" onclick="showTab('settings')" class="sidebar-link" id="nav-settings">
+                <i class="fas fa-cog w-4"></i>Settings
+            </a>
+            <div class="pt-4 border-t border-white/8 mt-4">
+                <a href="jobs.html" class="sidebar-link">
+                    <i class="fas fa-search w-4"></i>Browse Jobs
+                </a>
+                <a href="index.html" onclick="logout()" class="sidebar-link text-red-400 hover:text-red-300">
+                    <i class="fas fa-sign-out-alt w-4"></i>Logout
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-64 min-h-screen">
+        <!-- Top Bar -->
+        <div class="glass-dark border-b border-white/8 px-6 py-4 flex items-center justify-between sticky top-0 z-30">
+            <div class="flex items-center gap-3">
+                <button class="lg:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h2 class="font-outfit font-semibold text-lg text-white" id="pageTitle">Overview</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="relative p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all">
+                    <i class="fas fa-bell"></i>
+                    <span class="notif-dot"></span>
+                </button>
+                <a href="jobs.html" class="btn-primary px-4 py-2 rounded-full text-xs font-semibold hidden sm:flex items-center gap-2">
+                    <i class="fas fa-search"></i>Find Jobs
+                </a>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <!-- OVERVIEW TAB -->
+            <div id="tab-overview">
+                <!-- Welcome Banner -->
+                <div class="relative overflow-hidden rounded-2xl mb-6 p-6" style="background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(249,115,22,0.2)); border: 1px solid rgba(99,102,241,0.3);">
+                    <div class="orb" style="width:200px;height:200px;background:#6366f1;top:-80px;right:-50px;opacity:0.2;position:absolute;"></div>
+                    <div class="relative">
+                        <p class="text-sm text-primary-300 mb-1">Welcome back! 👋</p>
+                        <h3 class="font-outfit font-bold text-2xl text-white mb-2" id="welcomeName">John Doe</h3>
+                        <p class="text-gray-300 text-sm">You have <span class="text-accent-400 font-semibold">2 new job matches</span> today. Keep applying!</p>
+                        <a href="jobs.html" class="inline-flex items-center gap-2 mt-4 btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">
+                            <i class="fas fa-rocket"></i>Find Matching Jobs
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div class="dash-stat-card">
+                        <div class="dash-icon bg-primary-500/20 border border-primary-500/30">
+                            <i class="fas fa-file-alt text-primary-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-outfit font-bold text-white" id="statApplied">0</p>
+                            <p class="text-xs text-gray-400">Applied</p>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-icon bg-yellow-500/20 border border-yellow-500/30">
+                            <i class="fas fa-clock text-yellow-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-outfit font-bold text-white" id="statReview">0</p>
+                            <p class="text-xs text-gray-400">In Review</p>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-icon bg-green-500/20 border border-green-500/30">
+                            <i class="fas fa-calendar-check text-green-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-outfit font-bold text-white" id="statInterview">0</p>
+                            <p class="text-xs text-gray-400">Interviews</p>
+                        </div>
+                    </div>
+                    <div class="dash-stat-card">
+                        <div class="dash-icon bg-accent-500/20 border border-accent-500/30">
+                            <i class="fas fa-heart text-accent-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-outfit font-bold text-white" id="statSaved">0</p>
+                            <p class="text-xs text-gray-400">Saved Jobs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Completion Widget -->
+                <div class="dash-card mb-6" id="profileCompletion" style="padding:16px 20px">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm text-white font-medium">Profile Completeness</span>
+                        <span class="text-sm font-bold text-accent-400">Loading...</span>
+                    </div>
+                </div>
+
+                <!-- Recent Activity & Recommended -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Recent Applications -->
+                    <div class="dash-card">
+                        <h4 class="font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-file-alt text-primary-400 text-sm"></i>Recent Applications
+                        </h4>
+                        <div id="recentApps">
+                            <p class="text-gray-500 text-sm text-center py-4">No applications yet. <a href="jobs.html" class="text-primary-400">Start applying!</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Jobs -->
+                    <div class="dash-card">
+                        <h4 class="font-semibold text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-star text-accent-400 text-sm"></i>Recommended For You
+                        </h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/3 hover:bg-white/5 transition-all cursor-pointer" onclick="window.location.href='jobs.html'">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold" style="background:#6366f120;color:#818cf8">TC</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-white text-sm font-medium truncate">Senior Frontend Dev</p>
+                                    <p class="text-xs text-gray-400">TechCorp · $120k–$150k</p>
+                                </div>
+                                <span class="badge badge-new text-xs">New</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/3 hover:bg-white/5 transition-all cursor-pointer" onclick="window.location.href='jobs.html'">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold" style="background:#22c55e20;color:#4ade80">DM</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-white text-sm font-medium truncate">Data Scientist</p>
+                                    <p class="text-xs text-gray-400">DataMind · $130k–$175k</p>
+                                </div>
+                                <span class="badge badge-remote text-xs">Remote</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl bg-white/3 hover:bg-white/5 transition-all cursor-pointer" onclick="window.location.href='jobs.html'">
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold" style="background:#06b6d420;color:#22d3ee">CB</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-white text-sm font-medium truncate">Backend Engineer</p>
+                                    <p class="text-xs text-gray-400">CloudBase · $125k–$160k</p>
+                                </div>
+                                <span class="badge badge-featured text-xs">Featured</span>
+                            </div>
+                        </div>
+                        <a href="jobs.html" class="block mt-4 text-center text-xs text-primary-400 hover:underline">View all recommendations →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APPLICATIONS TAB -->
+            <div id="tab-applications" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="font-outfit font-semibold text-xl text-white">My Applications</h3>
+                    <div class="flex gap-2">
+                        <button class="tab-btn active text-xs" onclick="filterApps('all', this)">All</button>
+                        <button class="tab-btn text-xs" onclick="filterApps('pending', this)">Pending</button>
+                        <button class="tab-btn text-xs" onclick="filterApps('interview', this)">Interview</button>
+                    </div>
+                </div>
+                <div id="applicationsTable">
+                    <!-- Table -->
+                    <div class="dash-card overflow-x-auto p-0" style="padding:0">
+                        <table class="data-table">
+                            <thead><tr>
+                                <th>Position</th>
+                                <th>Company</th>
+                                <th>Applied</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr></thead>
+                            <tbody id="appsTableBody">
+                                <tr><td colspan="5" class="text-center text-gray-500 py-8">No applications yet. <a href="jobs.html" class="text-primary-400">Browse jobs</a></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAVED JOBS TAB -->
+            <div id="tab-saved" class="hidden">
+                <h3 class="font-outfit font-semibold text-xl text-white mb-6">Saved Jobs</h3>
+                <div id="savedJobsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <p class="text-gray-500 col-span-2 text-center py-8">No saved jobs yet. <a href="jobs.html" class="text-primary-400">Browse and save jobs →</a></p>
+                </div>
+            </div>
+
+            <!-- PROFILE TAB -->
+            <div id="tab-profile" class="hidden">
+                <h3 class="font-outfit font-semibold text-xl text-white mb-6">My Profile</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Profile Card -->
+                    <div class="dash-card text-center lg:col-span-1">
+                        <div class="avatar text-2xl mx-auto mb-4" style="width:80px;height:80px;">JD</div>
+                        <h4 class="font-semibold text-white mb-1" id="profileName">John Doe</h4>
+                        <p class="text-sm text-gray-400 mb-1" id="profileJobTitle">Software Developer</p>
+                        <p class="text-xs text-gray-500 mb-4" id="profileEmail">john@example.com</p>
+                        <div class="flex justify-center gap-2 mb-4">
+                            <span class="badge badge-remote">Open to Work</span>
+                        </div>
+                        <button onclick="showTab('settings')" class="btn-outline w-full py-2.5 rounded-xl text-sm">Edit Profile</button>
+                    </div>
+
+                    <!-- Profile Details -->
+                    <div class="lg:col-span-2 space-y-4">
+                        <div class="dash-card">
+                            <h4 class="font-semibold text-white mb-4">Professional Summary</h4>
+                            <p class="text-gray-400 text-sm">Passionate software developer with 3+ years of experience building modern web applications. Skilled in React, Node.js, and cloud technologies.</p>
+                        </div>
+                        <div class="dash-card">
+                            <h4 class="font-semibold text-white mb-4">Skills</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-lg bg-primary-500/15 border border-primary-500/30 text-primary-300 text-xs">React</span>
+                                <span class="px-3 py-1 rounded-lg bg-primary-500/15 border border-primary-500/30 text-primary-300 text-xs">JavaScript</span>
+                                <span class="px-3 py-1 rounded-lg bg-primary-500/15 border border-primary-500/30 text-primary-300 text-xs">Node.js</span>
+                                <span class="px-3 py-1 rounded-lg bg-primary-500/15 border border-primary-500/30 text-primary-300 text-xs">TypeScript</span>
+                                <span class="px-3 py-1 rounded-lg bg-primary-500/15 border border-primary-500/30 text-primary-300 text-xs">CSS/SCSS</span>
+                                <span class="px-3 py-1 rounded-lg bg-primary-500/15 border border-primary-500/30 text-primary-300 text-xs">AWS</span>
+                            </div>
+                        </div>
+                        <div class="dash-card">
+                            <h4 class="font-semibold text-white mb-4">Resume</h4>
+                            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/3 border border-white/8">
+                                <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center"><i class="fas fa-file-pdf text-red-400"></i></div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-white font-medium">John_Doe_Resume.pdf</p>
+                                    <p class="text-xs text-gray-400">Uploaded 2 days ago · 245 KB</p>
+                                </div>
+                                <button class="btn-outline px-3 py-2 rounded-xl text-xs">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETTINGS TAB -->
+            <div id="tab-settings" class="hidden">
+                <h3 class="font-outfit font-semibold text-xl text-white mb-6">Account Settings</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="dash-card">
+                        <h4 class="font-semibold text-white mb-4">Personal Information</h4>
+                        <div class="space-y-3">
+                            <div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" value="John Doe" id="settName"></div>
+                            <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" value="john@example.com" id="settEmail"></div>
+                            <div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" placeholder="+1 (555) 000-0000"></div>
+                            <div class="form-group"><label class="form-label">Location</label><input type="text" class="form-input" placeholder="New York, NY"></div>
+                            <button onclick="saveSettings()" class="btn-primary px-6 py-2.5 rounded-xl text-sm font-semibold">Save Changes</button>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <h4 class="font-semibold text-white mb-4">Notifications</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div><p class="text-sm text-white">Job Alerts</p><p class="text-xs text-gray-400">Get notified of new matching jobs</p></div>
+                                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><p class="text-sm text-white">Application Updates</p><p class="text-xs text-gray-400">When employers view your profile</p></div>
+                                <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><p class="text-sm text-white">Newsletter</p><p class="text-xs text-gray-400">Weekly career tips and insights</p></div>
+                                <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                            </div>
+                        </div>
+                        <div class="border-t border-white/8 mt-6 pt-6">
+                            <h4 class="font-semibold text-white mb-4">Change Password</h4>
+                            <div class="space-y-3">
+                                <input type="password" class="form-input" id="pwdCurrent" placeholder="Current password">
+                                <input type="password" class="form-input" id="pwdNew" placeholder="New password (min 8 chars)">
+                                <input type="password" class="form-input" id="pwdConfirm" placeholder="Confirm new password">
+                                <button onclick="changePassword()" class="btn-primary px-6 py-2.5 rounded-xl text-sm font-semibold">Update Password</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-500">
+        <div class="glass border border-white/20 rounded-2xl px-5 py-4 flex items-center space-x-3 shadow-2xl">
+            <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center"></div>
+            <span id="toastMsg" class="text-sm font-medium text-white"></span>
+        </div>
+    </div>
+
+    <style>
+        .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle input { display: none; }
+        .toggle-slider { position: absolute; cursor: pointer; top:0; left:0; right:0; bottom:0; background: rgba(255,255,255,0.1); border-radius: 24px; transition: 0.4s; border: 1px solid rgba(255,255,255,0.1); }
+        .toggle-slider::before { content:''; position:absolute; height:16px; width:16px; left:3px; bottom:3px; background:rgba(255,255,255,0.4); border-radius:50%; transition:0.4s; }
+        .toggle input:checked + .toggle-slider { background: linear-gradient(135deg,#6366f1,#4f46e5); border-color: #6366f1; }
+        .toggle input:checked + .toggle-slider::before { transform: translateX(20px); background: white; }
+    </style>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // ── Load dashboard data ────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Redirect if not logged in or wrong role
+            if (!Auth.isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const user = Auth.getUser() || {};
+            if (user.role === 'employer') {
+                window.location.href = 'employer-dashboard.html';
+                return;
+            } else if (user.role === 'admin') {
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // Populate user info from cache first (instant)
+            if (user.name) setUserUI(user);
+
+            // Then fetch fresh data from API
+            try {
+                const [meData, appsData, savedData] = await Promise.all([
+                    Auth.me(),
+                    Applications.getMyApplications(),
+                    Applications.getMySaved()
+                ]);
+
+                // Update user info with fresh data
+                setUserUI(meData.user);
+                localStorage.setItem('jobuser', JSON.stringify(meData.user));
+
+                // Render applications
+                const apps = appsData.applications || [];
+                const inReviewCount = apps.filter(a => a.status === 'reviewed').length;
+                const interviewCount = apps.filter(a => a.status === 'interview').length;
+
+                document.getElementById('statApplied').textContent = apps.length;
+                document.getElementById('statReview').textContent = inReviewCount;
+                document.getElementById('statInterview').textContent = interviewCount;
+                document.getElementById('sidebarAppsCount').textContent = apps.length;
+                renderApplicationsTable(apps);
+
+                // Render saved jobs
+                document.getElementById('statSaved').textContent = savedData.count || 0;
+                renderSavedJobsFromAPI(savedData.saved || []);
+
+                // Profile completion widget
+                renderProfileCompletion(meData.user);
+            } catch (err) {
+                console.warn('API unavailable, using localStorage fallback:', err.message);
+                // Fallback to localStorage
+                const applied = JSON.parse(localStorage.getItem('appliedJobs') || '[]');
+                document.getElementById('statApplied').textContent = applied.length;
+                document.getElementById('statReview').textContent = 0;
+                document.getElementById('statInterview').textContent = 0;
+                document.getElementById('sidebarAppsCount').textContent = applied.length;
+                renderApplicationsTableFallback(applied);
+
+                const saved = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+                document.getElementById('statSaved').textContent = saved.length;
+                renderSavedJobsFallback(saved);
+            }
+        });
+
+        function setUserUI(user) {
+            if (!user) return;
+            const name = user.name || 'User';
+            const email = user.email || '';
+            const role = user.role || 'jobseeker';
+
+            document.getElementById('sidebarName').textContent = name;
+            document.getElementById('welcomeName').textContent = name;
+            document.getElementById('profileName').textContent = name;
+            document.getElementById('profileEmail').textContent = email;
+            document.getElementById('settName').value = name;
+            document.getElementById('settEmail').value = email;
+            if (user.job_title) document.getElementById('profileJobTitle').textContent = user.job_title;
+            document.getElementById('sidebarRole').textContent = role === 'employer' ? 'Employer' : 'Job Seeker';
+
+            // Avatar initials
+            const initials = name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+            document.querySelectorAll('.avatar').forEach(a => a.textContent = initials);
+        }
+
+        function showTab(tab) {
+            document.querySelectorAll('[id^="tab-"]').forEach(t => t.classList.add('hidden'));
+            document.getElementById(`tab-${tab}`).classList.remove('hidden');
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            document.getElementById(`nav-${tab}`)?.classList.add('active');
+            document.getElementById('pageTitle').textContent = {
+                overview:'Overview', applications:'Applications',
+                saved:'Saved Jobs', profile:'My Profile', settings:'Settings'
+            }[tab];
+        }
+
+        // ── API-based renderers ────────────────────────────────────────────
+        function renderApplicationsTable(applications) {
+            const tbody = document.getElementById('appsTableBody');
+            const recentEl = document.getElementById('recentApps');
+            if (!applications.length) {
+                tbody.innerHTML = '<tr><td colspan="5" class="text-center text-gray-500 py-8">No applications yet. <a href="jobs.html" class="text-primary-400">Browse jobs</a></td></tr>';
+                recentEl.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">No applications yet. <a href="jobs.html" class="text-primary-400">Start applying!</a></p>';
+                return;
+            }
+
+            const statusMap = {
+                pending:  { label: 'Pending',           cls: 'status-pending' },
+                reviewed: { label: 'Under Review',      cls: 'status-reviewed' },
+                interview:{ label: 'Interview Scheduled',cls: 'status-interview' },
+                rejected: { label: 'Rejected',          cls: 'status-rejected' }
+            };
+
+            tbody.innerHTML = applications.map(app => {
+                const st = statusMap[app.status] || statusMap.pending;
+                const date = new Date(app.applied_at).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+                return `<tr>
+                    <td><div class="flex items-center gap-2">
+                        <div style="width:32px;height:32px;border-radius:8px;background:${app.logo}20;color:${app.logo};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">${app.logo_text}</div>
+                        <span class="text-white font-medium text-sm">${app.title}</span>
+                    </div></td>
+                    <td>${app.company}</td>
+                    <td>${date}</td>
+                    <td><span class="badge ${st.cls} text-xs">${st.label}</span></td>
+                    <td><button onclick="viewJobDetail(${app.job_id})" class="text-primary-400 text-xs hover:underline">View</button></td>
+                </tr>`;
+            }).join('');
+
+            recentEl.innerHTML = applications.slice(0, 3).map(app => {
+                const st = statusMap[app.status] || statusMap.pending;
+                return `<div class="flex items-center gap-3 p-3 rounded-xl bg-white/3 mb-2">
+                    <div style="width:36px;height:36px;border-radius:10px;background:${app.logo}20;color:${app.logo};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0">${app.logo_text}</div>
+                    <div class="flex-1 min-w-0"><p class="text-white text-sm font-medium truncate">${app.title}</p><p class="text-xs text-gray-400">${app.company}</p></div>
+                    <span class="badge ${st.cls} text-xs">${st.label}</span>
+                </div>`;
+            }).join('');
+        }
+
+        function renderSavedJobsFromAPI(saved) {
+            const grid = document.getElementById('savedJobsGrid');
+            if (!saved.length) {
+                grid.innerHTML = '<p class="text-gray-500 col-span-2 text-center py-8">No saved jobs yet. <a href="jobs.html" class="text-primary-400">Browse and save jobs →</a></p>';
+                return;
+            }
+            // Convert API shape to the format renderJobCard expects
+            grid.innerHTML = saved.map(j => renderJobCard({
+                id:         j.job_id,
+                title:      j.title,
+                company:    j.company,
+                location:   j.location,
+                salary:     j.salary,
+                type:       j.type,
+                remote:     j.remote,
+                logo:       j.logo,
+                logoText:   j.logo_text,
+                postedDays: j.posted_days,
+                featured:   j.featured,
+                skills:     Array.isArray(j.skills) ? j.skills : []
+            })).join('');
+        }
+
+        // ── localStorage fallback renderers ────────────────────────────────
+        function renderApplicationsTableFallback(applied) {
+            const tbody = document.getElementById('appsTableBody');
+            if (!applied.length) return;
+            const statuses = ['Pending', 'Under Review', 'Interview Scheduled'];
+            tbody.innerHTML = applied.map(id => {
+                const job = typeof JOBS !== 'undefined' ? JOBS.find(j => j.id === id) : null;
+                if (!job) return '';
+                const status = statuses[id % 3];
+                const cls = status === 'Pending' ? 'status-pending' : status === 'Under Review' ? 'status-reviewed' : 'status-interview';
+                return `<tr>
+                    <td><div class="flex items-center gap-2">
+                        <div style="width:32px;height:32px;border-radius:8px;background:${job.logo}20;color:${job.logo};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">${job.logoText}</div>
+                        <span class="text-white font-medium text-sm">${job.title}</span>
+                    </div></td>
+                    <td>${job.company}</td>
+                    <td>—</td>
+                    <td><span class="badge ${cls} text-xs">${status}</span></td>
+                    <td><button onclick="viewJobDetail(${job.id})" class="text-primary-400 text-xs hover:underline">View</button></td>
+                </tr>`;
+            }).join('');
+        }
+
+        function renderSavedJobsFallback(saved) {
+            const grid = document.getElementById('savedJobsGrid');
+            if (!saved.length) return;
+            grid.innerHTML = saved.map(id => {
+                const job = typeof JOBS !== 'undefined' ? JOBS.find(j => j.id === id) : null;
+                return job ? renderJobCard(job) : '';
+            }).join('');
+        }
+
+        function filterApps(type, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        async function saveSettings() {
+            const name  = document.getElementById('settName').value.trim();
+            const email = document.getElementById('settEmail').value.trim();
+            if (!name) { showToast('Name cannot be empty.', 'error'); return; }
+            try {
+                await Auth.updateProfile({ name, email });
+                const user = Auth.getUser();
+                if (user) { user.name = name; localStorage.setItem('jobuser', JSON.stringify(user)); }
+                setUserUI({ name, email });
+                showToast('Settings saved successfully!', 'success');
+            } catch (err) {
+                showToast(err.message || 'Failed to save settings.', 'error');
+            }
+        }
+
+        async function changePassword() {
+            const current = document.getElementById('pwdCurrent').value;
+            const newPwd  = document.getElementById('pwdNew').value;
+            const confirm = document.getElementById('pwdConfirm').value;
+            if (!current || !newPwd) { showToast('All password fields are required.', 'error'); return; }
+            if (newPwd !== confirm)  { showToast('New passwords do not match.', 'error'); return; }
+            if (newPwd.length < 8)  { showToast('Password must be at least 8 characters.', 'error'); return; }
+            try {
+                const data = await Auth.changePassword(current, newPwd);
+                showToast(data.message || 'Password changed!', 'success');
+                document.getElementById('pwdCurrent').value = '';
+                document.getElementById('pwdNew').value = '';
+                document.getElementById('pwdConfirm').value = '';
+            } catch (err) {
+                showToast(err.message || 'Failed to change password.', 'error');
+            }
+        }
+
+        function renderProfileCompletion(user) {
+            const fields = [
+                { key: 'name',         label: 'Full Name' },
+                { key: 'email',        label: 'Email' },
+                { key: 'phone',        label: 'Phone Number' },
+                { key: 'job_title',    label: 'Job Title' },
+                { key: 'location',     label: 'Location' },
+                { key: 'bio',          label: 'Bio' },
+                { key: 'skills',       label: 'Skills' },
+            ];
+            const filled = fields.filter(f => user[f.key] && user[f.key] !== '[]');
+            const pct = Math.round((filled.length / fields.length) * 100);
+
+            const el = document.getElementById('profileCompletion');
+            if (!el) return;
+            const color = pct === 100 ? '#4ade80' : pct >= 60 ? '#818cf8' : '#f97316';
+            const missing = fields.filter(f => !user[f.key] || user[f.key] === '[]').map(f => f.label);
+            el.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm text-white font-medium">Profile Completeness</span>
+                    <span class="text-sm font-bold" style="color:${color}">${pct}%</span>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden">
+                    <div style="height:100%;width:${pct}%;background:${color};border-radius:3px;transition:width 1s ease"></div>
+                </div>
+                ${pct < 100 ? `<p class="text-xs text-gray-400 mt-2">Add: ${missing.slice(0,3).join(', ')}${missing.length > 3 ? ' +more' : ''} to complete your profile.</p>` : '<p class="text-xs text-green-400 mt-2">✓ Profile complete! You\'re more likely to get hired.</p>'}
+            `;
+        }
+
+        function logout() {
+            Auth.logout();
+        }
+    </script>
+</body>
+</html>

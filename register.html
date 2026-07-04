@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - JobNexus</title>
+    <meta name="description" content="Create your free JobNexus account to start applying for jobs, track your applications, and build your professional profile.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{inter:['Inter','sans-serif'],outfit:['Outfit','sans-serif']},colors:{primary:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},accent:{400:'#fb923c',500:'#f97316',600:'#ea580c'},dark:{900:'#0f0f23',800:'#1a1a2e',700:'#16213e',600:'#0f3460'}}}}}</script>
+</head>
+<body class="font-inter bg-dark-900 text-white min-h-screen overflow-x-hidden">
+
+    <div class="fixed inset-0">
+        <div style="background: radial-gradient(ellipse at top right, rgba(99,102,241,0.25) 0%, transparent 60%), radial-gradient(ellipse at bottom left, rgba(249,115,22,0.15) 0%, transparent 60%), linear-gradient(180deg,#0f0f23 0%,#1a1a2e 100%); position:absolute;inset:0;"></div>
+        <div class="grid-pattern opacity-10" style="position:absolute;inset:0;"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="relative z-50 px-6 py-5 flex items-center justify-between">
+        <a href="index.html" class="flex items-center space-x-3 group">
+            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-briefcase text-white text-sm"></i></div>
+            <span class="font-outfit font-bold text-2xl bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">JobNexus</span>
+        </a>
+        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">Already have an account? <span class="text-primary-400">Sign In</span></a>
+    </nav>
+
+    <div class="relative z-10 flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-lg">
+            <!-- Step Indicator -->
+            <div class="flex items-center justify-center mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="step-indicator active" id="step1dot"><span>1</span></div>
+                    <div class="step-line" id="line12"></div>
+                    <div class="step-indicator" id="step2dot"><span>2</span></div>
+                    <div class="step-line" id="line23"></div>
+                    <div class="step-indicator" id="step3dot"><span>3</span></div>
+                </div>
+            </div>
+            <div class="text-center mb-6">
+                <p id="stepLabel" class="text-xs text-gray-500 uppercase tracking-wider">Step 1 of 3 — Account Type</p>
+            </div>
+
+            <div class="glass border border-white/10 rounded-3xl p-8 shadow-2xl shadow-black/30 animate-slide-up">
+                <!-- STEP 1: Account Type -->
+                <div id="step1">
+                    <h1 class="font-outfit font-bold text-2xl text-white mb-2 text-center">Join JobNexus</h1>
+                    <p class="text-gray-400 text-sm text-center mb-8">Choose how you'll use JobNexus</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div onclick="selectType('jobseeker')" id="typeJobseeker" class="account-type-card cursor-pointer">
+                            <div class="w-14 h-14 bg-primary-500/20 border border-primary-500/30 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                                <i class="fas fa-user-tie text-primary-400 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-white mb-2 text-center">Job Seeker</h3>
+                            <p class="text-xs text-gray-400 text-center">Find jobs, build your profile, track applications</p>
+                            <div class="mt-4 flex justify-center">
+                                <span class="text-xs px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400">Free Forever</span>
+                            </div>
+                        </div>
+                        <div onclick="selectType('employer')" id="typeEmployer" class="account-type-card cursor-pointer">
+                            <div class="w-14 h-14 bg-accent-500/20 border border-accent-500/30 rounded-2xl flex items-center justify-center mb-4 mx-auto">
+                                <i class="fas fa-building text-accent-400 text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-white mb-2 text-center">Employer</h3>
+                            <p class="text-xs text-gray-400 text-center">Post jobs, find talent, manage applications</p>
+                            <div class="mt-4 flex justify-center">
+                                <span class="text-xs px-3 py-1 rounded-full bg-accent-500/10 border border-accent-500/20 text-accent-400">3 Free Posts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="goStep(2)" id="step1Next" disabled class="btn-primary w-full py-3.5 rounded-xl text-sm font-semibold mt-6 opacity-50 cursor-not-allowed">
+                        Continue <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- STEP 2: Personal Info -->
+                <div id="step2" class="hidden">
+                    <h2 class="font-outfit font-bold text-xl text-white mb-6">Personal Details</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-group col-span-1">
+                            <label class="form-label">First Name</label>
+                            <input type="text" id="firstName" class="form-input" placeholder="John" required>
+                        </div>
+                        <div class="form-group col-span-1">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" id="lastName" class="form-input" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="regEmail" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" id="regPhone" class="form-input" placeholder="+1 (555) 000-0000">
+                    </div>
+                    <div id="jobseekerFields">
+                        <div class="form-group">
+                            <label class="form-label">Current Job Title</label>
+                            <input type="text" id="jobTitle" class="form-input" placeholder="e.g. Software Engineer">
+                        </div>
+                    </div>
+                    <div id="employerFields" class="hidden">
+                        <div class="form-group">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" id="companyName" class="form-input" placeholder="e.g. Acme Corp">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Company Size</label>
+                            <select id="companySize" class="form-input">
+                                <option value="">Select size</option>
+                                <option>1-10</option><option>11-50</option><option>51-200</option>
+                                <option>201-1000</option><option>1000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 mt-2">
+                        <button onclick="goStep(1)" class="btn-outline flex-1 py-3 rounded-xl text-sm"><i class="fas fa-arrow-left mr-2"></i>Back</button>
+                        <button onclick="goStep(3)" class="btn-primary flex-1 py-3 rounded-xl text-sm font-semibold">Continue <i class="fas fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Password -->
+                <div id="step3" class="hidden">
+                    <h2 class="font-outfit font-bold text-xl text-white mb-6">Secure Your Account</h2>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <div class="relative">
+                            <input type="password" id="regPassword" class="form-input pr-12" placeholder="Min. 8 characters" oninput="checkPasswordStrength(this.value)" required>
+                            <button type="button" onclick="togglePassword('regPassword', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-1">
+                                <i class="far fa-eye text-sm"></i>
+                            </button>
+                        </div>
+                        <!-- Strength indicator -->
+                        <div class="mt-2">
+                            <div class="progress-bar"><div id="strengthBar" class="progress-fill" style="width:0%"></div></div>
+                            <p id="strengthText" class="text-xs mt-1 text-gray-500">Enter a password</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" id="regConfirm" class="form-input pr-12" placeholder="Re-enter password" required>
+                            <button type="button" onclick="togglePassword('regConfirm', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white p-1">
+                                <i class="far fa-eye text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="agreeTerms" style="accent-color:#6366f1;width:16px;height:16px;margin-top:2px;flex-shrink:0;">
+                            <span class="text-xs text-gray-400">I agree to the <a href="#" class="text-primary-400 hover:underline">Terms of Service</a>, <a href="#" class="text-primary-400 hover:underline">Privacy Policy</a>, and consent to receive job alerts.</span>
+                        </label>
+                    </div>
+                    <div id="regError" class="hidden mb-4 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm flex items-center gap-2">
+                        <i class="fas fa-exclamation-circle"></i><span id="regErrorMsg"></span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="goStep(2)" class="btn-outline flex-1 py-3 rounded-xl text-sm"><i class="fas fa-arrow-left mr-2"></i>Back</button>
+                        <button onclick="handleRegister()" id="regBtn" class="btn-primary flex-1 py-3 rounded-xl text-sm font-semibold"><i class="fas fa-user-plus mr-2"></i>Create Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-500">
+        <div class="glass border border-white/20 rounded-2xl px-5 py-4 flex items-center space-x-3 shadow-2xl">
+            <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center"></div>
+            <span id="toastMsg" class="text-sm font-medium text-white"></span>
+        </div>
+    </div>
+
+    <style>
+        .account-type-card {
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.08);
+            border-radius: 20px; padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .account-type-card:hover { transform: translateY(-4px); }
+        .account-type-card.selected-jobseeker { border-color: rgba(99,102,241,0.7); background: rgba(99,102,241,0.1); }
+        .account-type-card.selected-employer { border-color: rgba(249,115,22,0.7); background: rgba(249,115,22,0.1); }
+        .step-indicator {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 600;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            color: #64748b; transition: all 0.4s ease;
+        }
+        .step-indicator.active { background: linear-gradient(135deg,#6366f1,#4f46e5); border-color: #6366f1; color: white; }
+        .step-indicator.done { background: rgba(34,197,94,0.2); border-color: #22c55e; color: #4ade80; }
+        .step-line {
+            width: 60px; height: 2px;
+            background: rgba(255,255,255,0.08);
+            transition: all 0.4s ease;
+        }
+        .step-line.done { background: linear-gradient(90deg,#6366f1,#22c55e); }
+    </style>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        let selectedType = '';
+        let currentStep = 1;
+
+        function selectType(type) {
+            selectedType = type;
+            document.getElementById('typeJobseeker').className = 'account-type-card cursor-pointer';
+            document.getElementById('typeEmployer').className = 'account-type-card cursor-pointer';
+            document.getElementById(`type${type.charAt(0).toUpperCase()+type.slice(1)}`).className = `account-type-card cursor-pointer selected-${type}`;
+            const btn = document.getElementById('step1Next');
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+
+        function goStep(n) {
+            document.querySelectorAll('#step1,#step2,#step3').forEach(s => s.classList.add('hidden'));
+            document.getElementById(`step${n}`).classList.remove('hidden');
+            currentStep = n;
+
+            // Update dots and lines
+            for (let i = 1; i <= 3; i++) {
+                const dot = document.getElementById(`step${i}dot`);
+                if (i < n) dot.className = 'step-indicator done', dot.innerHTML = '<i class="fas fa-check text-xs"></i>';
+                else if (i === n) dot.className = 'step-indicator active', dot.innerHTML = `<span>${i}</span>`;
+                else dot.className = 'step-indicator', dot.innerHTML = `<span>${i}</span>`;
+            }
+            if (document.getElementById('line12')) document.getElementById('line12').className = n > 1 ? 'step-line done' : 'step-line';
+            if (document.getElementById('line23')) document.getElementById('line23').className = n > 2 ? 'step-line done' : 'step-line';
+
+            document.getElementById('stepLabel').textContent = `Step ${n} of 3 — ${['Account Type','Personal Details','Set Password'][n-1]}`;
+
+            // Show/hide employer fields
+            if (n === 2) {
+                document.getElementById('jobseekerFields').classList.toggle('hidden', selectedType === 'employer');
+                document.getElementById('employerFields').classList.toggle('hidden', selectedType !== 'employer');
+            }
+        }
+
+        function checkPasswordStrength(val) {
+            let score = 0;
+            if (val.length >= 8) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const bar = document.getElementById('strengthBar');
+            const text = document.getElementById('strengthText');
+            const levels = [
+                { w:'25%', col:'#ef4444', t:'Weak' },
+                { w:'50%', col:'#f97316', t:'Fair' },
+                { w:'75%', col:'#eab308', t:'Good' },
+                { w:'100%', col:'#22c55e', t:'Strong ✓' },
+            ];
+            const lv = levels[Math.max(0, score - 1)] || levels[0];
+            bar.style.width = val ? lv.w : '0%';
+            bar.style.background = lv.col;
+            text.textContent = val ? lv.t : 'Enter a password';
+            text.style.color = val ? lv.col : '#64748b';
+        }
+
+        function togglePassword(id, btn) {
+            const f = document.getElementById(id);
+            f.type = f.type === 'password' ? 'text' : 'password';
+            btn.querySelector('i').className = f.type === 'text' ? 'far fa-eye-slash text-sm' : 'far fa-eye text-sm';
+        }
+
+        async function handleRegister() {
+            const pass    = document.getElementById('regPassword').value;
+            const confirm = document.getElementById('regConfirm').value;
+            const agree   = document.getElementById('agreeTerms').checked;
+            const email   = document.getElementById('regEmail').value.trim();
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName  = document.getElementById('lastName').value.trim();
+            const errDiv  = document.getElementById('regError');
+            const errMsg  = document.getElementById('regErrorMsg');
+
+            // Client-side validation
+            if (!firstName || !lastName) { errMsg.textContent = 'Please enter your full name'; errDiv.classList.remove('hidden'); errDiv.style.display='flex'; return; }
+            if (pass !== confirm) { errMsg.textContent = 'Passwords do not match'; errDiv.classList.remove('hidden'); errDiv.style.display='flex'; return; }
+            if (!agree) { errMsg.textContent = 'Please agree to the Terms of Service'; errDiv.classList.remove('hidden'); errDiv.style.display='flex'; return; }
+            if (pass.length < 8) { errMsg.textContent = 'Password must be at least 8 characters'; errDiv.classList.remove('hidden'); errDiv.style.display='flex'; return; }
+
+            errDiv.classList.add('hidden');
+            const btn = document.getElementById('regBtn');
+            btn.innerHTML = '<div class="loader" style="width:18px;height:18px;border-width:2px;"></div><span>Creating account...</span>';
+            btn.disabled = true;
+
+            try {
+                const payload = {
+                    name:         `${firstName} ${lastName}`,
+                    email,
+                    password:     pass,
+                    role:         selectedType || 'jobseeker',
+                    phone:        document.getElementById('regPhone')?.value || '',
+                    job_title:    document.getElementById('jobTitle')?.value || '',
+                    company_name: document.getElementById('companyName')?.value || '',
+                    company_size: document.getElementById('companySize')?.value || ''
+                };
+
+                const data = await Auth.register(payload);
+                showToast('Account created successfully! 🎉', 'success');
+                setTimeout(() => {
+                    window.location.href = data.user.role === 'employer' ? 'employer-dashboard.html' : 'dashboard.html';
+                }, 1000);
+            } catch (err) {
+                btn.innerHTML = '<i class="fas fa-user-plus mr-2"></i>Create Account';
+                btn.disabled = false;
+                errMsg.textContent = err.message || 'Registration failed. Please try again.';
+                errDiv.classList.remove('hidden');
+                errDiv.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>

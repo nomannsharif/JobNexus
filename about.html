@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - JobNexus</title>
+    <meta name="description" content="Learn about JobNexus — our mission, team, and commitment to connecting people with their perfect careers.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{inter:['Inter','sans-serif'],outfit:['Outfit','sans-serif']},colors:{primary:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},accent:{400:'#fb923c',500:'#f97316',600:'#ea580c'},dark:{900:'#0f0f23',800:'#1a1a2e',700:'#16213e',600:'#0f3460'}}}}}</script>
+</head>
+<body class="font-inter bg-dark-900 text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-briefcase text-white text-sm"></i></div>
+                    <span class="font-outfit font-bold text-2xl bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">JobNexus</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Home</a>
+                    <a href="jobs.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Find Jobs</a>
+                    <a href="companies.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Companies</a>
+                    <a href="about.html" class="nav-link active px-4 py-2 rounded-xl text-sm font-medium">About</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Contact</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-3">
+                    <a href="login.html" class="btn-ghost px-5 py-2.5 rounded-full text-sm font-medium">Sign In</a>
+                    <a href="register.html" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">Get Started</a>
+                </div>
+                <button id="menuBtn" class="lg:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all" onclick="toggleMenu()"><i id="menuIcon" class="fas fa-bars text-xl"></i></button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden glass-dark border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
+                <a href="index.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-home mr-3 w-4"></i>Home</a>
+                <a href="jobs.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-search mr-3 w-4"></i>Find Jobs</a>
+                <a href="companies.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-building mr-3 w-4"></i>Companies</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-36 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at top center, rgba(99,102,241,0.2) 0%, transparent 70%), linear-gradient(180deg,#0f0f23,#1a1a2e)"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full glass border border-primary-500/30 mb-6 animate-fade-in">
+                <i class="fas fa-heart text-red-400 text-xs animate-pulse"></i>
+                <span class="text-xs text-gray-300 font-medium uppercase tracking-widest">Our Story</span>
+            </div>
+            <h1 class="font-outfit font-black text-5xl sm:text-6xl text-white mb-6 animate-slide-up">
+                We're on a Mission to<br><span class="gradient-text">Change Careers</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed animate-slide-up delay-100">
+                JobNexus was founded with one belief: finding your dream job shouldn't feel like a second job. We combine cutting-edge technology with human insight to make career transitions seamless.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass border border-primary-500/20 rounded-2xl p-8 text-center reveal">
+                    <div class="w-16 h-16 bg-primary-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-bullseye text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-white mb-3">Our Mission</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">To democratize access to career opportunities by building the most inclusive, efficient, and user-friendly job marketplace in the world.</p>
+                </div>
+                <div class="glass border border-accent-500/20 rounded-2xl p-8 text-center reveal" style="transition-delay:0.1s">
+                    <div class="w-16 h-16 bg-accent-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-eye text-accent-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-white mb-3">Our Vision</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">A world where every person has equal access to fulfilling work, and every employer can find the talent they need to build great things.</p>
+                </div>
+                <div class="glass border border-green-500/20 rounded-2xl p-8 text-center reveal" style="transition-delay:0.2s">
+                    <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-handshake text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-outfit font-bold text-xl text-white mb-3">Our Values</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Transparency, inclusivity, and excellence guide everything we do. We believe in honest connections and measurable outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-20 relative">
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(99,102,241,0.05) 0%, transparent 100%)"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-outfit font-bold text-4xl text-white mb-4">Our <span class="gradient-text">Impact</span> in Numbers</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center reveal">
+                    <div class="text-5xl font-outfit font-black gradient-text mb-2" data-count="50000" data-suffix="+">0</div>
+                    <p class="text-gray-400">Jobs Posted</p>
+                </div>
+                <div class="text-center reveal" style="transition-delay:0.1s">
+                    <div class="text-5xl font-outfit font-black gradient-text mb-2" data-count="120000" data-suffix="+">0</div>
+                    <p class="text-gray-400">Job Seekers</p>
+                </div>
+                <div class="text-center reveal" style="transition-delay:0.2s">
+                    <div class="text-5xl font-outfit font-black gradient-text mb-2" data-count="8500" data-suffix="+">0</div>
+                    <p class="text-gray-400">Companies</p>
+                </div>
+                <div class="text-center reveal" style="transition-delay:0.3s">
+                    <div class="text-5xl font-outfit font-black gradient-text mb-2" data-count="95" data-suffix="%">0</div>
+                    <p class="text-gray-400">Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-outfit font-bold text-4xl text-white mb-4">Meet the <span class="gradient-text">Team</span></h2>
+                <p class="text-gray-400">The passionate people behind JobNexus</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="team-card text-center reveal">
+                    <div class="w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white" style="background: linear-gradient(135deg,#6366f1,#4f46e5)">N</div>
+                    <h4 class="font-semibold text-white">Noman</h4>
+                    <p class="text-xs text-primary-400 mt-1">Founder & Developer</p>
+                    <p class="text-xs text-gray-500 mt-1">SP24-BAi-041</p>
+                    <div class="flex justify-center gap-2 mt-3">
+                        <a href="https://linkedin.com/in/noman" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://github.com/noman" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="team-card text-center reveal" style="transition-delay:0.1s">
+                    <div class="w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white" style="background: linear-gradient(135deg,#f97316,#ea580c)">SK</div>
+                    <h4 class="font-semibold text-white">Sarah K.</h4>
+                    <p class="text-xs text-accent-400 mt-1">Head of Design</p>
+                    <p class="text-xs text-gray-500 mt-1">UX Lead</p>
+                    <div class="flex justify-center gap-2 mt-3">
+                        <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-dribbble"></i></a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="team-card text-center reveal" style="transition-delay:0.2s">
+                    <div class="w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white" style="background: linear-gradient(135deg,#22c55e,#16a34a)">AM</div>
+                    <h4 class="font-semibold text-white">Alex M.</h4>
+                    <p class="text-xs text-green-400 mt-1">Lead Engineer</p>
+                    <p class="text-xs text-gray-500 mt-1">Full-Stack Dev</p>
+                    <div class="flex justify-center gap-2 mt-3">
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-card text-center reveal" style="transition-delay:0.3s">
+                    <div class="w-24 h-24 rounded-2xl mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white" style="background: linear-gradient(135deg,#a855f7,#7c3aed)">JR</div>
+                    <h4 class="font-semibold text-white">Jamie R.</h4>
+                    <p class="text-xs text-purple-400 mt-1">Product Manager</p>
+                    <p class="text-xs text-gray-500 mt-1">Strategy & Growth</p>
+                    <div class="flex justify-center gap-2 mt-3">
+                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-btn" style="width:28px;height:28px;font-size:10px;"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 relative">
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(15,15,35,0) 0%, rgba(26,26,46,0.5) 100%)"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-outfit font-bold text-4xl text-white mb-4">What People <span class="gradient-text">Say</span></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="testimonial-card reveal">
+                    <div class="flex gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-5">"JobNexus helped me land my dream role at a top tech company within 3 weeks. The interface is beautiful and the job matching is spot on!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="avatar" style="width:40px;height:40px;font-size:14px">EJ</div>
+                        <div><p class="text-white font-medium text-sm">Emily J.</p><p class="text-xs text-gray-400">Software Engineer at TechCorp</p></div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay:0.1s">
+                    <div class="flex gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-5">"As an employer, the applicant quality on JobNexus is exceptional. We filled 3 positions in under a month with perfectly matched candidates."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="avatar" style="width:40px;height:40px;font-size:14px;background:linear-gradient(135deg,#f97316,#ea580c)">MC</div>
+                        <div><p class="text-white font-medium text-sm">Mark C.</p><p class="text-xs text-gray-400">CTO at DesignStudio</p></div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay:0.2s">
+                    <div class="flex gap-1 mb-4">
+                        <i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star-half-alt text-yellow-400 text-sm"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-5">"The career dashboard is incredible. Being able to track all my applications in one place and get personalized job recommendations changed my job search completely."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="avatar" style="width:40px;height:40px;font-size:14px;background:linear-gradient(135deg,#22c55e,#16a34a)">RL</div>
+                        <div><p class="text-white font-medium text-sm">Rachel L.</p><p class="text-xs text-gray-400">Data Scientist at DataMind</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="font-outfit font-black text-4xl text-white mb-6">Ready to <span class="gradient-text">Start</span>?</h2>
+            <p class="text-gray-400 mb-8">Join over 120,000 professionals on JobNexus</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="register.html" class="btn-primary px-8 py-4 rounded-full text-base font-semibold inline-flex items-center gap-2"><i class="fas fa-rocket"></i>Create Free Account</a>
+                <a href="contact.html" class="btn-outline px-8 py-4 rounded-full text-base font-medium inline-flex items-center gap-2"><i class="fas fa-envelope"></i>Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">© 2024 JobNexus. All rights reserved. | Developed by Noman (SP24-BAi-041)</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-sm"></i></button>
+
+    <style>
+        .team-card { transition: all 0.4s ease; padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        .team-card:hover { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.3); transform: translateY(-6px); }
+    </style>
+
+    <script src="js/main.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', () => { initCounters(); revealOnScroll(); });</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details - JobNexus</title>
+    <meta name="description" content="View full job details, requirements, and apply directly on JobNexus.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>tailwind.config={theme:{extend:{fontFamily:{inter:['Inter','sans-serif'],outfit:['Outfit','sans-serif']},colors:{primary:{50:'#eef2ff',100:'#e0e7ff',200:'#c7d2fe',300:'#a5b4fc',400:'#818cf8',500:'#6366f1',600:'#4f46e5',700:'#4338ca',800:'#3730a3',900:'#312e81'},accent:{400:'#fb923c',500:'#f97316',600:'#ea580c'},dark:{900:'#0f0f23',800:'#1a1a2e',700:'#16213e',600:'#0f3460'}}}}}</script>
+</head>
+<body class="font-inter bg-dark-900 text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30 group-hover:scale-110 transition-transform duration-300"><i class="fas fa-briefcase text-white text-sm"></i></div>
+                    <span class="font-outfit font-bold text-2xl bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">JobNexus</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-1">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Home</a>
+                    <a href="jobs.html" class="nav-link active px-4 py-2 rounded-xl text-sm font-medium">Find Jobs</a>
+                    <a href="companies.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Companies</a>
+                    <a href="about.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">About</a>
+                    <a href="contact.html" class="nav-link px-4 py-2 rounded-xl text-sm font-medium">Contact</a>
+                </div>
+                <div class="hidden lg:flex items-center space-x-3">
+                    <a href="login.html" class="btn-ghost px-5 py-2.5 rounded-full text-sm font-medium">Sign In</a>
+                    <a href="register.html" class="btn-primary px-5 py-2.5 rounded-full text-sm font-semibold">Get Started</a>
+                </div>
+                <button id="menuBtn" class="lg:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/10 transition-all" onclick="toggleMenu()"><i id="menuIcon" class="fas fa-bars text-xl"></i></button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden lg:hidden glass-dark border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
+                <a href="index.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-home mr-3 w-4"></i>Home</a>
+                <a href="jobs.html" class="mobile-nav-link flex items-center px-4 py-3 rounded-xl text-sm font-medium"><i class="fas fa-search mr-3 w-4"></i>Find Jobs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="pt-24 pb-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-2 text-xs text-gray-500">
+                <a href="index.html" class="hover:text-white transition-colors">Home</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <a href="jobs.html" class="hover:text-white transition-colors">Jobs</a>
+                <i class="fas fa-chevron-right text-xs"></i>
+                <span id="breadcrumbTitle" class="text-gray-300">Job Details</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Detail Content -->
+    <section class="py-8 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div id="jobContent">
+                <div class="flex items-center justify-center py-20">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply Modal -->
+    <div id="applyModal" class="modal-overlay">
+        <div class="modal-box max-w-lg w-full max-h-screen overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="font-outfit font-bold text-xl text-white">Apply for <span id="modalJobTitle" class="gradient-text">this job</span></h3>
+                <button onclick="closeApplyModal()" class="text-gray-400 hover:text-white transition-colors p-1"><i class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="submitApplication(event)">
+                <div class="form-group">
+                    <label class="form-label">Full Name *</label>
+                    <input type="text" class="form-input" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-input" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Portfolio / LinkedIn URL</label>
+                    <input type="url" class="form-input" placeholder="https://...">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Resume (PDF/DOC) *</label>
+                    <div class="border-2 border-dashed border-white/15 rounded-xl p-6 text-center hover:border-primary-500/50 transition-colors cursor-pointer" onclick="document.getElementById('resumeUpload').click()">
+                        <i class="fas fa-cloud-upload-alt text-2xl text-gray-500 mb-2 block"></i>
+                        <p class="text-sm text-gray-400">Click to upload or drag & drop</p>
+                        <p class="text-xs text-gray-600 mt-1">PDF, DOC, DOCX (max 5MB)</p>
+                    </div>
+                    <input type="file" id="resumeUpload" class="hidden" accept=".pdf,.doc,.docx" onchange="updateFileLabel(this)">
+                    <p id="fileName" class="text-xs text-primary-400 mt-2 hidden"></p>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Cover Letter</label>
+                    <textarea class="form-input" rows="4" placeholder="Why are you a great fit for this role?"></textarea>
+                </div>
+                <div class="flex gap-3 mt-2">
+                    <button type="button" onclick="closeApplyModal()" class="btn-outline flex-1 py-3 rounded-xl text-sm">Cancel</button>
+                    <button type="submit" id="applySubmitBtn" class="btn-primary flex-1 py-3 rounded-xl text-sm font-semibold"><i class="fas fa-paper-plane mr-2"></i>Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-sm"></i></button>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-500">
+        <div class="glass border border-white/20 rounded-2xl px-5 py-4 flex items-center space-x-3 shadow-2xl">
+            <div id="toastIcon" class="w-8 h-8 rounded-full flex items-center justify-center"></div>
+            <span id="toastMsg" class="text-sm font-medium text-white"></span>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        let currentJobId = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = parseInt(params.get('id')) || 1;
+            const autoApply = params.get('apply') === 'true';
+            currentJobId = id;
+
+            // Try API first
+            try {
+                const data = await Jobs.getById(id);
+                const job = { ...data.job, logoText: data.job.logo_text, postedDays: data.job.posted_days };
+                renderJobDetail(job);
+                if (autoApply) {
+                    openApplyModal(job.id, job.title);
+                }
+            } catch (err) {
+                // Fallback to local JOBS array
+                const job = typeof JOBS !== 'undefined' ? (JOBS.find(j => j.id === id) || JOBS[0]) : null;
+                if (job) {
+                    renderJobDetail(job);
+                    if (autoApply) {
+                        openApplyModal(job.id, job.title);
+                    }
+                }
+                else document.getElementById('jobContent').innerHTML = '<p class="text-center text-gray-400 py-20">Job not found.</p>';
+            }
+        });
+
+        function renderJobDetail(job) {
+            document.title = `${job.title} at ${job.company} - JobNexus`;
+            document.getElementById('breadcrumbTitle').textContent = job.title;
+            const daysText = job.postedDays === 1 ? '1 day ago' : `${job.postedDays} days ago`;
+            const related = JOBS.filter(j => j.id !== job.id && j.category === job.category).slice(0, 3);
+
+            document.getElementById('jobContent').innerHTML = `
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Content -->
+                <div class="lg:col-span-2">
+                    <!-- Job Header -->
+                    <div class="glass border border-white/10 rounded-2xl p-7 mb-6">
+                        <div class="flex items-start gap-5 mb-5">
+                            <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-xl font-bold border flex-shrink-0"
+                                style="background:${job.logo}20;color:${job.logo};border-color:${job.logo}40">${job.logoText}</div>
+                            <div>
+                                <h1 class="font-outfit font-bold text-2xl sm:text-3xl text-white mb-1">${job.title}</h1>
+                                <p class="text-gray-400">${job.company} · <span class="text-primary-400">${job.location}</span></p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="badge ${getTypeBadge(job.type)}">${job.type}</span>
+                            ${job.remote ? '<span class="badge badge-remote">Remote</span>' : '<span class="badge badge-full">On-site</span>'}
+                            ${job.featured ? '<span class="badge badge-featured">Featured</span>' : ''}
+                            ${job.postedDays <= 2 ? '<span class="badge badge-new">New</span>' : ''}
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 rounded-xl bg-white/3 border border-white/8">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-dollar-sign text-green-400 text-sm"></i>
+                                <div><p class="text-xs text-gray-500">Salary</p><p class="text-sm text-white font-semibold">${job.salary}</p></div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-clock text-accent-400 text-sm"></i>
+                                <div><p class="text-xs text-gray-500">Posted</p><p class="text-sm text-white font-semibold">${daysText}</p></div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-folder text-purple-400 text-sm"></i>
+                                <div><p class="text-xs text-gray-500">Category</p><p class="text-sm text-white font-semibold">${job.category}</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="glass border border-white/10 rounded-2xl p-7 mb-6">
+                        <h2 class="font-outfit font-bold text-xl text-white mb-4">Job Description</h2>
+                        <p class="text-gray-400 leading-relaxed mb-4">${job.description}</p>
+                        <p class="text-gray-400 leading-relaxed">This is an exciting opportunity to work with a talented, multidisciplinary team on impactful projects. You'll have the chance to grow your skills, take ownership of meaningful work, and make a real difference.</p>
+
+                        <h3 class="font-semibold text-white mt-6 mb-3">Key Responsibilities</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check-circle text-primary-400 mt-0.5 flex-shrink-0"></i>Design and develop high-quality, scalable software solutions</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check-circle text-primary-400 mt-0.5 flex-shrink-0"></i>Collaborate with cross-functional teams to define and ship features</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check-circle text-primary-400 mt-0.5 flex-shrink-0"></i>Write clean, well-tested code and participate in code reviews</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check-circle text-primary-400 mt-0.5 flex-shrink-0"></i>Mentor junior team members and contribute to engineering culture</li>
+                        </ul>
+
+                        <h3 class="font-semibold text-white mt-6 mb-3">Requirements</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check text-green-400 mt-0.5 flex-shrink-0"></i>3+ years of professional experience in this field</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check text-green-400 mt-0.5 flex-shrink-0"></i>Proficiency in the required skills listed below</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check text-green-400 mt-0.5 flex-shrink-0"></i>Strong communication skills and collaborative mindset</li>
+                            <li class="flex items-start gap-3 text-sm text-gray-400"><i class="fas fa-check text-green-400 mt-0.5 flex-shrink-0"></i>Bachelor's degree in relevant field or equivalent experience</li>
+                        </ul>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="glass border border-white/10 rounded-2xl p-7 mb-6">
+                        <h2 class="font-outfit font-bold text-xl text-white mb-4">Required Skills</h2>
+                        <div class="flex flex-wrap gap-3">
+                            ${job.skills.map(s => `<span class="px-4 py-2 rounded-xl bg-primary-500/15 border border-primary-500/30 text-primary-300 text-sm font-medium">${s}</span>`).join('')}
+                            <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 text-sm">Team Collaboration</span>
+                            <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 text-sm">Problem Solving</span>
+                            <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 text-sm">Communication</span>
+                        </div>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="glass border border-white/10 rounded-2xl p-7">
+                        <h2 class="font-outfit font-bold text-xl text-white mb-4">Benefits & Perks</h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div class="flex items-center gap-2 p-3 rounded-xl bg-white/3 border border-white/8 text-sm text-gray-300"><i class="fas fa-heartbeat text-red-400 text-sm"></i>Health Insurance</div>
+                            <div class="flex items-center gap-2 p-3 rounded-xl bg-white/3 border border-white/8 text-sm text-gray-300"><i class="fas fa-home text-blue-400 text-sm"></i>Remote Work</div>
+                            <div class="flex items-center gap-2 p-3 rounded-xl bg-white/3 border border-white/8 text-sm text-gray-300"><i class="fas fa-laptop text-purple-400 text-sm"></i>Equipment Budget</div>
+                            <div class="flex items-center gap-2 p-3 rounded-xl bg-white/3 border border-white/8 text-sm text-gray-300"><i class="fas fa-graduation-cap text-yellow-400 text-sm"></i>L&D Budget</div>
+                            <div class="flex items-center gap-2 p-3 rounded-xl bg-white/3 border border-white/8 text-sm text-gray-300"><i class="fas fa-calendar text-green-400 text-sm"></i>Unlimited PTO</div>
+                            <div class="flex items-center gap-2 p-3 rounded-xl bg-white/3 border border-white/8 text-sm text-gray-300"><i class="fas fa-coins text-accent-400 text-sm"></i>Equity/Stock</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-1 space-y-5">
+                    <!-- Apply Card -->
+                    <div class="glass border border-primary-500/30 rounded-2xl p-6 sticky top-24">
+                        <div class="text-center mb-5">
+                            <p class="text-3xl font-outfit font-black gradient-text">${job.salary}</p>
+                            <p class="text-xs text-gray-400 mt-1">per year</p>
+                        </div>
+                        <button onclick="openApplyModal(${job.id}, '${job.title.replace(/'/g,"\\'")}' )" class="btn-primary w-full py-4 rounded-xl text-sm font-bold mb-3 flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i>Apply Now
+                        </button>
+                        <button onclick="toggleSaveDetail(${job.id}, this)" class="btn-outline w-full py-3 rounded-xl text-sm flex items-center justify-center gap-2" id="saveDetailBtn">
+                            <i class="far fa-heart"></i>Save Job
+                        </button>
+                        <div class="pt-5 mt-5 border-t border-white/8 space-y-3">
+                            ${job.applicants_count !== undefined ? `
+                                <div class="flex items-center gap-2 text-sm text-gray-400" id="detailApplicantsCount">
+                                    <i class="fas fa-users text-primary-400 w-4"></i>${job.applicants_count} applicant${job.applicants_count === 1 ? '' : 's'}
+                                </div>
+                            ` : ''}
+                            <div class="flex items-center gap-2 text-sm text-gray-400"><i class="fas fa-calendar text-accent-400 w-4"></i>Deadline: May 15, 2024</div>
+                            <div class="flex items-center gap-2 text-sm text-gray-400"><i class="fas fa-share-alt text-green-400 w-4"></i><button onclick="shareJob()" class="text-green-400 hover:underline">Share this job</button></div>
+                        </div>
+                    </div>
+
+                    <!-- Company Info -->
+                    <div class="glass border border-white/10 rounded-2xl p-6">
+                        <h3 class="font-semibold text-white mb-4">About Company</h3>
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-base font-bold border flex-shrink-0" style="background:${job.logo}20;color:${job.logo};border-color:${job.logo}40">${job.logoText}</div>
+                            <div><p class="text-white font-medium">${job.company}</p><div class="flex gap-0.5 mt-0.5">${'<i class="fas fa-star text-yellow-400" style="font-size:10px"></i>'.repeat(5)}</div></div>
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">A leading company in the ${job.category} sector, known for innovation and great work culture.</p>
+                        <a href="companies.html" class="block text-center btn-outline w-full py-2.5 rounded-xl text-xs">View Company</a>
+                    </div>
+
+                    <!-- Similar Jobs -->
+                    <div class="glass border border-white/10 rounded-2xl p-6">
+                        <h3 class="font-semibold text-white mb-4">Similar Jobs</h3>
+                        <div class="space-y-3">
+                            ${related.map(j => `
+                            <a href="job-detail.html?id=${j.id}" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition-all block">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0" style="background:${j.logo}20;color:${j.logo}">${j.logoText}</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm text-white font-medium truncate">${j.title}</p>
+                                    <p class="text-xs text-gray-500">${j.salary}</p>
+                                </div>
+                            </a>`).join('')}
+                        </div>
+                        <a href="jobs.html?category=${encodeURIComponent(job.category)}" class="block mt-3 text-center text-xs text-primary-400 hover:underline">More ${job.category} jobs →</a>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        function openApplyModal(id, title) {
+            document.getElementById('modalJobTitle').textContent = title;
+            document.getElementById('applyModal').classList.add('active');
+        }
+
+        function closeApplyModal() {
+            document.getElementById('applyModal').classList.remove('active');
+        }
+
+        async function submitApplication(e) {
+            e.preventDefault();
+            const btn = document.getElementById('applySubmitBtn');
+            btn.innerHTML = '<div class="loader" style="width:18px;height:18px;border-width:2px;"></div> Submitting...';
+            btn.disabled = true;
+
+            if (typeof Auth !== 'undefined' && Auth.isLoggedIn() && currentJobId) {
+                try {
+                    const data = await Applications.apply(currentJobId);
+                    closeApplyModal();
+                    showToast(data.message || 'Application submitted! 🎉', 'success');
+                } catch (err) {
+                    if (err.status === 409) {
+                        closeApplyModal();
+                        showToast('You already applied for this job.', 'info');
+                    } else {
+                        showToast(err.message || 'Failed to apply.', 'error');
+                    }
+                } finally {
+                    btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Submit Application';
+                    btn.disabled = false;
+                }
+            } else if (!Auth.isLoggedIn()) {
+                closeApplyModal();
+                showToast('Please sign in to apply.', 'info');
+                setTimeout(() => { window.location.href = 'login.html'; }, 1500);
+            } else {
+                // Fallback
+                setTimeout(() => {
+                    closeApplyModal();
+                    showToast('Application submitted! 🎉', 'success');
+                    btn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>Submit Application';
+                    btn.disabled = false;
+                }, 1200);
+            }
+        }
+
+        async function toggleSaveDetail(id, btn) {
+            if (typeof Auth !== 'undefined' && Auth.isLoggedIn()) {
+                try {
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ...';
+                    const data = await Applications.toggleSave(id);
+                    if (data.saved) {
+                        btn.innerHTML = '<i class="fas fa-heart text-red-400"></i> Saved';
+                        showToast('Job saved!', 'success');
+                    } else {
+                        btn.innerHTML = '<i class="far fa-heart"></i> Save Job';
+                        showToast('Removed from saved jobs', 'info');
+                    }
+                } catch (err) {
+                    btn.innerHTML = '<i class="far fa-heart"></i> Save Job';
+                    showToast('Failed to save job.', 'error');
+                }
+                return;
+            }
+            // localStorage fallback
+            const saved = JSON.parse(localStorage.getItem('savedJobs') || '[]');
+            const idx = saved.indexOf(id);
+            if (idx > -1) {
+                saved.splice(idx, 1);
+                btn.innerHTML = '<i class="far fa-heart"></i>Save Job';
+                showToast('Removed from saved jobs', 'info');
+            } else {
+                saved.push(id);
+                btn.innerHTML = '<i class="fas fa-heart text-red-400"></i>Saved';
+                showToast('Job saved!', 'success');
+            }
+            localStorage.setItem('savedJobs', JSON.stringify(saved));
+        }
+
+        function updateFileLabel(input) {
+            const el = document.getElementById('fileName');
+            if (input.files[0]) { el.textContent = `✓ ${input.files[0].name}`; el.classList.remove('hidden'); }
+        }
+
+        function shareJob() {
+            if (navigator.share) {
+                navigator.share({ title: document.title, url: window.location.href });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                showToast('Job link copied to clipboard!', 'success');
+            }
+        }
+    </script>
+</body>
+</html>
