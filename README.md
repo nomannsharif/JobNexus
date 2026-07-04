@@ -1,4 +1,4 @@
-# JobNexus - Premium Job Portal 🚀
+# JobNexus - Premium Job Portal 
 
 JobNexus is a modern, feature-rich Job Portal web application designed to connect top talent with premium employers. Built using a sleek dark-themed responsive design (with glassmorphism and tailored animations) and powered by a secure REST API backend, the platform enables seamless job search, dynamic filtering, application tracking, and profile management.
 
@@ -6,7 +6,7 @@ Developed as a project for **Web Technologies** by Noman (SP24-BAi-041).
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
 ### For Job Seekers
 * **Advanced Job Discovery**: Browse jobs with real-time composite filtering (keywords, location, category, job type, work mode, and min-salary range).
@@ -27,7 +27,7 @@ Developed as a project for **Web Technologies** by Noman (SP24-BAi-041).
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### Backend
 * **Core**: Node.js & Express
@@ -43,7 +43,7 @@ Developed as a project for **Web Technologies** by Noman (SP24-BAi-041).
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```text
 Job Portal/
@@ -82,7 +82,7 @@ Job Portal/
 
 ---
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 Ensure you have **Node.js** (v14 or higher) installed.
 
@@ -125,7 +125,7 @@ Open **`http://localhost:8080`** in your browser to run the web application.
 
 ---
 
-## 🔑 Demo Account Credentials
+##  Demo Account Credentials
 
 Use these seeded credentials to explore different roles:
 
